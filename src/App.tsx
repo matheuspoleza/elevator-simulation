@@ -55,6 +55,14 @@ const Elevator = styled.div<{ currentFloor: number }>`
   position: absolute;
 `;
 
+const Floor = styled.div<{ value: number }>`
+  width: 100%;
+  height: 1px;
+  background-color: white;
+  position: absolute;
+  bottom: ${props => (800 / FLOORS) * props.value}px;
+`;
+
 function App() {
   const [currentFloor, setCurrentFloor] = useState(0);
 
@@ -75,6 +83,9 @@ function App() {
 
       <ElevatorContainer>
         <ElevatorStrings>
+          {Array.from(Array(FLOORS).keys()).map((value) => (
+            <Floor value={value} />
+          ))}
           <Elevator currentFloor={currentFloor} />
         </ElevatorStrings>
       </ElevatorContainer>
